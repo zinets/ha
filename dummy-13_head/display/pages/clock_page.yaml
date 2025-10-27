@@ -1,0 +1,32 @@
+lvgl:
+  pages:
+    - id: clock_page
+      widgets:
+        - obj:
+            id: clock_page_bg
+            bg_color: 0x000000
+            bg_opa: 100%
+            width: 240
+            height: 240
+            align: CENTER
+            border_width: 0
+        - label:
+            id: main_time_label
+            text: "--:--"
+            translate_x: 0
+            translate_y: 0
+            align: CENTER
+            text_color: 0x43E5E5
+            text_opa: 100%
+            text_font: font_montserrat_80
+
+        # - label:
+        #     text: "\U000F0597"
+        #     id: lbl_weather_forecast_condition_icon
+        #     text_font: icons_80
+        #     text_align: CENTER
+
+        #     translate_x: 0
+        #     translate_y: 49
+        #     align: CENTER
+

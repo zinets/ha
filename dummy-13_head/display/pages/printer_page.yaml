@@ -70,23 +70,3 @@ lvgl:
           text_color: 0xDBF9FF
           text_opa: 100%
           text_font: font_small
-    
-    - id: clock_page
-      widgets:
-        - obj:
-            id: clock_page_bg
-            bg_color: 0x000000
-            bg_opa: 100%
-            width: 240
-            height: 240
-            align: CENTER
-            border_width: 0
-        - label:
-            id: main_time_label
-            text: "--:--"
-            translate_x: 0
-            translate_y: 46
-            align: TOP_MID
-            text_color: 0xDBF9FF
-            text_opa: 100%
-            text_font: font_main_clock

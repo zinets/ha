@@ -7,7 +7,7 @@ packages:
   homeassistant: !include api.yaml
   hardware: !include hardware.yaml
   sensors: !include sensors.yaml
-  graphics: !include resources/lvgl.yaml
+  graphics: !include display/lvgl.yaml
 
 globals:
     - id: remain_time_data
@@ -28,18 +28,6 @@ interval:
   - interval: 10s
     then:
       - script.execute: switch_page
-      
-# Шрифт для текста
-font:
-  - file: "gfonts://Roboto"
-    id: font_small
-    size: 30
-  - file: "gfonts://Roboto"
-    id: font_remain
-    size: 43
-  - file: "gfonts://Roboto"
-    id: font_main_clock
-    size: 80
     
 time:
   - platform: sntp
@@ -49,8 +37,6 @@ time:
       - cron: '* * * * * *'
         then:
           - script.execute: time_update
-
-
 
 script:
   - id: switch_page
