@@ -1,0 +1,92 @@
+lvgl:
+  pages:
+    - id: printer_page
+      widgets:
+      - obj:
+          id: printer_page_bg
+          bg_color: 0x000000
+          bg_opa: 100%
+          width: 240
+          height: 240
+          align: CENTER
+          border_width: 0
+          
+      - arc:
+          id: progress_bar
+          width: 236
+          height: 236
+          align: TOP_LEFT
+          translate_x: 2
+          translate_y: 2
+          value: 50
+          
+          # MAIN (фон дуги)
+          arc_color: 0x367A69
+          arc_opa: 100%
+          arc_width: 14
+
+          # INDICATOR (активная часть дуги)
+          indicator:
+            arc_color: 0x97D5C6
+            arc_opa: 100%
+            arc_width: 14
+
+          # KNOB (ползунок — прозрачный)
+          knob:
+            bg_opa: 0%
+      
+      # progress
+      - label:
+          id: progress_label
+          text: "100 %"
+          height: 50
+          translate_x: 0
+          translate_y: 30
+          align: TOP_MID
+          text_color: 0x97D5C6
+          text_opa: 100%
+          text_font: font_remain
+
+      # remain time
+      - label:
+          id: time_remain_label
+          text: "--:--"
+          height: 50
+          translate_x: 0
+          translate_y: 80
+          align: TOP_MID
+          text_color: 0xDBF9FF
+          text_opa: 100%
+          text_font: font_remain
+
+      # now time
+      - label:
+          id: time_label
+          text: "--:--"
+          height: 50
+          translate_x: 0
+          translate_y: 181
+          align: TOP_MID
+          text_color: 0xDBF9FF
+          text_opa: 100%
+          text_font: font_small
+    
+    - id: clock_page
+      widgets:
+        - obj:
+            id: clock_page_bg
+            bg_color: 0x000000
+            bg_opa: 100%
+            width: 240
+            height: 240
+            align: CENTER
+            border_width: 0
+        - label:
+            id: main_time_label
+            text: "--:--"
+            translate_x: 0
+            translate_y: 46
+            align: TOP_MID
+            text_color: 0xDBF9FF
+            text_opa: 100%
+            text_font: font_main_clock

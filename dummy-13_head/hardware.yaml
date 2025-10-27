@@ -1,0 +1,27 @@
+# SPI-шина
+spi:
+  clk_pin: GPIO2      # SCK
+  mosi_pin: GPIO3     # MOSI (SDA на дисплее)
+  # miso не нужен
+  
+# --- I²C шина ---
+i2c:
+  sda: GPIO7
+  scl: GPIO6
+  scan: true
+  frequency: 100kHz
+#  id: bus_a
+
+# Дисплей
+display:
+  - platform: ili9xxx
+    model: GC9A01A
+    cs_pin: GPIO5
+    dc_pin: GPIO0
+    reset_pin: GPIO1
+    color_palette: 8BIT
+    dimensions: 240x240
+    rotation: 0
+    invert_colors: true
+    data_rate: 20MHz
+    id: round_display

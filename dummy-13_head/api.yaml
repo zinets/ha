@@ -1,0 +1,20 @@
+# Enable Home Assistant API
+api:
+  password: ""
+  encryption:
+    key: "HfSHrywlFiF/SuLxtWt6UeGOwvcnnYipdd0nidyih4A="
+    
+ota:
+  - platform: esphome
+    password: ""
+
+wifi:
+  ssid: "HUAWEI-V5ZNS6"
+  password: "134679852"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Dummy-13 head Fallback Hotspot"
+    password: "134679852"
+
+captive_portal:

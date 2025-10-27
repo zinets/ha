@@ -1,0 +1,116 @@
+# --- Датчики ---
+sensor:
+  # A103 (AHT20 + BMP280)
+  - platform: aht10
+    variant: AHT20
+    temperature:
+      name: "Температура (AHT20)"
+      id: temp_aht20
+      device_class: temperature
+      state_class: measurement
+      unit_of_measurement: "°C"
+      icon: mdi:thermometer
+      accuracy_decimals: 1
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
+    humidity:
+      name: "Вологість (AHT20)"
+      id: hum_aht20
+      device_class: humidity
+      state_class: measurement
+      unit_of_measurement: "%"
+      icon: mdi:water-percent
+      accuracy_decimals: 1
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 1
+    address: 0x38
+    update_interval: 60s
+  - platform: bmp280_i2c
+    pressure:
+      name: "Атмосферний тиск (BME280)"
+      id: pressure_bmp280
+      device_class: atmospheric_pressure
+      state_class: measurement
+      unit_of_measurement: "мм.рт.ст."
+      icon: mdi:gauge
+      accuracy_decimals: 0
+      filters:
+        - multiply: 0.75006
+        - round: 0
+    temperature:
+      name: "Temperature (BME280)"
+      id: temp_bmp280
+      oversampling: 16x
+      accuracy_decimals: 0
+    address: 0x77
+    update_interval: 60s
+    
+  # ENS160 (качество воздуха)
+  - platform: ens160_i2c
+    eco2:
+      name: "Еквівалентний CO₂ (ENS160)"
+      device_class: carbon_dioxide
+      state_class: measurement
+      unit_of_measurement: "ppm"
+      icon: mdi:molecule-co2
+    tvoc:
+      name: "TVOC (ENS160)"
+      id: tvoc
+      state_class: measurement
+      unit_of_measurement: "µg/m³"
+      icon: mdi:chemical-weapon
+    aqi:
+      name: "AQI (ENS160)"
+      state_class: measurement
+      icon: mdi:weather-hazy
+    compensation:
+      temperature: temp_aht20
+      humidity: hum_aht20
+    address: 0x53
+    update_interval: 60s
+
+text_sensor:
+    - platform: homeassistant
+      id: CO2_concentration
+      entity_id: sensor.air_quality_station_co_concentration
+      on_value:
+        then:
+          - lambda: |-
+             auto str = x;
+             id(co2_concentration_str) = str;
+#          - lvgl.label.update:
+#                id: time_remain_label
+#                text:
+#                  format: "%s"
+#                  args: [ id(remain_time_data).c_str() ]
+    - platform: homeassistant
+      id: pm25_value
+      entity_id: sensor.air_quality_station_pm2_5
+      on_value:
+        then:
+          - lambda: |-
+             auto str = x;
+             id(pm25_value_str) = str;
+#          - lvgl.label.update:
+#                id: time_remain_label
+#                text:
+#                  format: "%s"
+#                  args: [ id(remain_time_data).c_str() ]
+    - platform: homeassistant
+      id: time_remain
+      entity_id: sensor.octoprint_end_time
+      attribute: remaining_text
+      on_value:
+        then:
+          - lambda: |-
+             auto str = x;
+             id(remain_time_data) = str;
+          - lvgl.label.update:
+                id: time_remain_label
+                text:
+                  format: "%s"
+                  args: [ id(remain_time_data).c_str() ]
